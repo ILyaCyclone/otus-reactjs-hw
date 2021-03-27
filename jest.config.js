@@ -4,5 +4,6 @@ module.exports = {
     testEnvironment: "node",
     transform: {
         "^.+\\.(js|ts)x?$": "<rootDir>/node_modules/babel-jest"
-    }
+    },
+    setupFilesAfterEnv: ['./jest.setup.js']
 };
