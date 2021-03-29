@@ -12,7 +12,9 @@
     "test": "jest",
     "coverage": "jest --collect-coverage",
     "lint": "eslint ./src/ --fix",
-    "check": "npm run lint && npm test"
+    "check": "npm run lint && npm test",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
   },
   "author": "ilyacyclone",
   "license": "ISC",
@@ -26,6 +28,9 @@
     "@babel/preset-env": "^7.12.11",
     "@babel/preset-react": "^7.12.13",
     "@babel/preset-typescript": "^7.12.7",
+    "@storybook/addon-essentials": "^6.1.21",
+    "@storybook/addon-links": "^6.1.21",
+    "@storybook/react": "^6.1.21",
     "@types/enzyme": "^3.10.8",
     "@types/jest": "^26.0.20",
     "@types/react": "^17.0.3",
