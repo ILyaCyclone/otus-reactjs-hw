@@ -1,12 +1,15 @@
 import "jsdom-global/register";
 import React from "react";
-import { shallow, mount, render } from "enzyme";
+import { shallow, mount } from "enzyme";
 
 import Board from "./Board";
 import Cell from "./Cell";
 
 describe("<Board />", () => {
-    const mockCellClicked = jest.fn();
+    let mockCellClicked: jest.Mock;
+    beforeEach(() => {
+        mockCellClicked = jest.fn();
+    });
 
     it("creates <Cell /> components with highlights", () => {
         const highlights = [
@@ -49,12 +52,11 @@ describe("<Board />", () => {
     });
 
     it("<Cell /> click calls cellClicked", () => {
-        const mockFunction = jest.fn();
         const highlights = [[false]];
-        const wrapper = mount(<Board highlights={highlights} cellClicked={mockFunction} />);
+        const wrapper = mount(<Board highlights={highlights} cellClicked={mockCellClicked} />);
 
         wrapper.find(Cell).simulate("click");
 
-        expect(mockFunction).toBeCalledTimes(1);
+        expect(mockCellClicked).toBeCalledTimes(1);
     });
 });

@@ -1,9 +1,9 @@
-import React, { FC, useState } from "react";
+import React, { FC } from "react";
 import Cell from "./Cell";
 
 interface Props {
     highlights: boolean[][];
-    cellClicked: (x: number, y: number) => void;
+    cellClicked: (row: number, col: number) => void;
 }
 
 const Board: FC<Props> = ({ highlights, cellClicked }) => {

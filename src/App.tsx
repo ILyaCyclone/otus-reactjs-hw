@@ -1,22 +1,24 @@
 import React from "react";
 
-import BoardContainer from "./components/BoardContainer";
+import BoardContainer from "./components/Board/BoardContainer";
 
 interface Props {
-    rowNumber: number,
-    colNumber: number
+    rows: number;
+    cols: number;
 }
 
-const App: React.FC<Props> = ({ rowNumber, colNumber }) => {
+const App: React.FC<Props> = ({ rows, cols }) => {
     return (
         <>
-            <h1>hi</h1>
-            <span>rowNumber = {rowNumber}</span>
-            <span>colNumber = {colNumber}</span>
+            <h1>Board</h1>
+            <p>
+                size: {rows}x{cols}
+            </p>
+            <p>Click cells to toggle their values</p>
 
-            <BoardContainer rowNumber={rowNumber} colNumber={colNumber} />
+            <BoardContainer rows={rows} cols={cols} />
         </>
     );
-}
+};
 
 export default App;

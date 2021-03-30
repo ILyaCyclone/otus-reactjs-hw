@@ -4,19 +4,20 @@ interface Props {
     highlighted: boolean;
     rowIndex: number;
     colIndex: number;
-    cellClicked: (x: number, y: number) => void;
+    cellClicked: (row: number, col: number) => void;
 }
 
-const baseCellStyle = {
+const baseCellStyle: React.CSSProperties = {
     width: "40px",
     height: "40px",
     border: "1px silver solid",
-    textAlign: "center"
+    textAlign: "center",
+    cursor: "pointer"
 };
 
-const highlightedCellStyle = {
+const highlightedCellStyle: React.CSSProperties = {
     ...baseCellStyle,
-    background: "silver"
+    backgroundColor: "#eee"
 };
 
 const Cell: React.FC<Props> = ({ highlighted, rowIndex, colIndex, cellClicked }) => {
