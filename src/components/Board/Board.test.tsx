@@ -6,57 +6,68 @@ import Board from "./Board";
 import Cell from "./Cell";
 
 describe("<Board />", () => {
-    let mockCellClicked: jest.Mock;
-    beforeEach(() => {
-        mockCellClicked = jest.fn();
-    });
+  let mockCellClicked: jest.Mock;
+  beforeEach(() => {
+    mockCellClicked = jest.fn();
+  });
 
-    it("creates <Cell /> components with highlights", () => {
-        const highlights = [
-            [true, false],
-            [false, true]
-        ];
-        const wrapper = shallow(<Board highlights={highlights} cellClicked={mockCellClicked} />);
+  it("creates <Cell /> components with highlights", () => {
+    const highlights = [
+      [true, false],
+      [false, true]
+    ];
+    const wrapper = shallow(
+      <Board highlights={highlights} cellClicked={mockCellClicked} />
+    );
 
-        const actualHighlights = wrapper.find("tr").map((tr) => tr.find(Cell).map((cell) => cell.prop("highlighted")));
+    const actualHighlights = wrapper
+      .find("tr")
+      .map((tr) => tr.find(Cell).map((cell) => cell.prop("highlighted")));
 
-        expect(actualHighlights).toStrictEqual([
-            [true, false],
-            [false, true]
-        ]);
-    });
+    expect(actualHighlights).toStrictEqual([
+      [true, false],
+      [false, true]
+    ]);
+  });
 
-    it("passes rowIndex, colIndex to <Cell /> components", () => {
-        const highlights = [
-            [false, false],
-            [false, false]
-        ];
-        const wrapper = shallow(<Board highlights={highlights} cellClicked={mockCellClicked} />);
+  it("passes rowIndex, colIndex to <Cell /> components", () => {
+    const highlights = [
+      [false, false],
+      [false, false]
+    ];
+    const wrapper = shallow(
+      <Board highlights={highlights} cellClicked={mockCellClicked} />
+    );
 
-        const actualIndexes = wrapper
-            .find("tr")
-            .map((tr, mapRowIndex) =>
-                tr.find(Cell).map((cell, mapColIndex) => (({ rowIndex, colIndex }) => ({ rowIndex, colIndex }))(cell.props()))
-            );
+    /* eslint-disable */
+    const actualIndexes = wrapper.find("tr")
+      .map((tr, mapRowIndex) => tr.find(Cell)
+          .map((cell, mapColIndex) =>
+            (({ rowIndex, colIndex }) => ({ rowIndex, colIndex }))(cell.props())
+          )
+      );
+    /* eslint-enable */
 
-        expect(actualIndexes).toStrictEqual([
-            [
-                { rowIndex: 0, colIndex: 0 },
-                { rowIndex: 0, colIndex: 1 }
-            ],
-            [
-                { rowIndex: 1, colIndex: 0 },
-                { rowIndex: 1, colIndex: 1 }
-            ]
-        ]);
-    });
+    expect(actualIndexes).toStrictEqual([
+      [
+        { rowIndex: 0, colIndex: 0 },
+        { rowIndex: 0, colIndex: 1 }
+      ],
+      [
+        { rowIndex: 1, colIndex: 0 },
+        { rowIndex: 1, colIndex: 1 }
+      ]
+    ]);
+  });
 
-    it("<Cell /> click calls cellClicked", () => {
-        const highlights = [[false]];
-        const wrapper = mount(<Board highlights={highlights} cellClicked={mockCellClicked} />);
+  it("<Cell /> click calls cellClicked", () => {
+    const highlights = [[false]];
+    const wrapper = mount(
+      <Board highlights={highlights} cellClicked={mockCellClicked} />
+    );
 
-        wrapper.find(Cell).simulate("click");
+    wrapper.find(Cell).simulate("click");
 
-        expect(mockCellClicked).toBeCalledTimes(1);
-    });
+    expect(mockCellClicked).toBeCalledTimes(1);
+  });
 });

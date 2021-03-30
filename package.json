@@ -12,7 +12,7 @@
     "test": "npx jest && npx loki",
     "jest": "jest",
     "coverage": "jest --collect-coverage",
-    "lint": "eslint ./src/ --fix",
+    "lint": "npx eslint --ext .js,.jsx,.ts,.tsx,.json --fix ./",
     "check": "npm run lint && npm test",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
