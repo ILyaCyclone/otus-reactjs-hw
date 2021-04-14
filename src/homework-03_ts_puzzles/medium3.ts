@@ -1,7 +1,9 @@
 // Hint: type guards
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-type FIXME = any;
+// FIXME -> UserOrderState
+
+// eslint-disable-next-line prettier/prettier
+export type UserOrderState = Exclude<OrderState, "buyingSupplies" | "producing">;
 
 const orderStates = [
   "initial",
@@ -11,9 +13,21 @@ const orderStates = [
   "fullfilled"
 ] as const;
 
-type OrderState = typeof orderStates[number];
+export type OrderState = typeof orderStates[number];
 
-export const getUserOrderStates = (orderStates: OrderState[]): FIXME =>
+// ---------- variant 1 ----------
+
+// eslint-disable-next-line prettier/prettier
+export const getUserOrderStates_v1 = (orderStates: OrderState[]): UserOrderState[] =>
   orderStates.filter(
     (state) => state !== "buyingSupplies" && state !== "producing"
-  );
+  ) as UserOrderState[];
+
+// ---------- variant 2 ----------
+
+const isUserOrderState = (state: OrderState): state is UserOrderState =>
+  state !== "buyingSupplies" && state !== "producing";
+
+export const getUserOrderStates_v2 = (
+  orderStates: OrderState[]
+): UserOrderState[] => orderStates.filter(isUserOrderState);

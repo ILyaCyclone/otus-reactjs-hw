@@ -2,8 +2,9 @@
 // Есть объединение (юнион) типов заказов в различных состояниях
 // Нужно заменить FIXME на тип который достанет из Order все возможные состояния (state)
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-type FIXME = any;
+// FIXME -> OrderState
+
+type OrderState = Order["state"];
 
 type Order =
   | {
@@ -37,4 +38,4 @@ type Order =
       fullfillmentDate: Date;
     };
 
-export const getOrderState = (order: Order): FIXME => order.state;
+export const getOrderState = (order: Order): OrderState => order.state;
